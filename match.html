@@ -22,6 +22,7 @@
 <div class="scoreboard" id="scoreboard"></div>
 </div>
 <aside class="side-stack">
+<div class="landscape-btns" aria-label="横画面リアクション"><button class="landscape-btn hot" data-kind="🔥 ナイスプレー" data-offset="4" type="button">🔥</button><button class="landscape-btn miss" data-kind="😫 惜しい" data-offset="3" type="button">😫</button><button class="landscape-btn laugh" data-kind="😅 あちゃー" data-offset="3" type="button">😅</button><button class="landscape-btn respect" data-kind="😳 マジで" data-offset="2" type="button">😳</button></div>
 <div class="info-tabs" aria-label="表示切替"><button class="info-tab active" data-info-tab="map" type="button">反応マップ</button><button class="info-tab" data-info-tab="timeline" type="button">タイムライン</button></div>
 <div class="heatmap info-panel is-active" data-info-panel="map"><div class="heat-title">📊 みんなの反応マップ</div><canvas id="chart" height="120"></canvas></div>
 <aside class="timeline-card info-panel" data-info-panel="timeline"><div class="timeline-title">ECHO TIMELINE</div>
@@ -120,6 +121,7 @@ function showNiceOptions(){niceOptions.classList.add("is-open");niceOptions.setA
 function hideNiceOptions(){niceOptions.classList.remove("is-open");niceOptions.setAttribute("aria-hidden","true")}
 document.querySelectorAll(".react[data-kind]").forEach(b=>b.onclick=()=>{addEvent(b.dataset.kind);if(b.id==="niceButton")showNiceOptions();else hideNiceOptions()});
 document.querySelectorAll(".nice-chip").forEach(b=>b.onclick=()=>{addEvent(b.dataset.kind);hideNiceOptions()});
+document.querySelectorAll(".landscape-btn[data-kind]").forEach(b=>b.onclick=()=>{const offset=Number(b.dataset.offset)||3;addEvent(b.dataset.kind,"",nowTime(offset));b.classList.add("is-hit");setTimeout(()=>b.classList.remove("is-hit"),180)});
 document.getElementById("commentBtn").onclick=()=>{let t=document.getElementById("commentText").value.trim();if(t)addEvent("💬",t)};
 document.getElementById("tacticToggle").onclick=()=>tactic.open?closeTactics():openTactics(null,true);
 document.getElementById("tacticReset").onclick=resetTactics;
